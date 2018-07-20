@@ -3,7 +3,7 @@ pub mod sha256;
 #[cfg(test)]
 mod tests {
 
-    use sha256::padding;
+    use sha256::{format_hash, hash, padding, parse};
 
     #[test]
     fn padding_test_0() {
@@ -33,6 +33,27 @@ mod tests {
 
         println!("{}", show_binary(&sum));
 
+    }
+
+    #[test]
+    fn parse_test_0() {
+        let str = String::from("abc");
+        let m = padding(str);
+
+        let p = parse(m);
+
+        assert_eq!(p.len(), 1);
+        assert_eq!(p[0].len(), 16);
+    }
+
+    #[test]
+    fn hash_test_abc() {
+        let hashed = hash(String::from("0123456789abcdefghijklmnopqrstuvwxyz0123456789abcdefghijklmnopqrstuvwxyz0123456789abcdefghijklmnopqrstuvwxyz0123456789abcdefghijklmnopqrstuvwxyz"));
+
+        println!("hashed \n
+                 {:?}\n
+                 {}", hashed, format_hash(hashed));
+        assert!(false);
     }
 
     fn show_binary(n: &u32) -> String {
