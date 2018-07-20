@@ -1,0 +1,6 @@
+[package]
+name = "sha256"
+version = "0.1.0"
+authors = ["Yasushi Sakai <ysshski@gmail.com>"]
+
+[dependencies]
