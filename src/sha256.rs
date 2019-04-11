@@ -18,7 +18,7 @@ const H:[u32; 8] = [
 ];
 
 // TODO: out Result?
-pub fn padding(m: String) -> Vec<u32> {
+pub fn padding(m: &str) -> Vec<u32> {
 
     let mut vec = Vec::new();
     let str_len = m.len();
@@ -59,7 +59,7 @@ pub fn padding(m: String) -> Vec<u32> {
 }
 
 // TODO: maybe its efficient to make the 2d matrix inside padding
-pub fn parse(v :Vec<u32>) -> Vec<Vec<u32>>  {
+pub fn parse(v :&Vec<u32>) -> Vec<Vec<u32>>  {
     let n = v.len() /  16; // 512 bits / 32 bits
     println!("{}", n);
     // get n
@@ -117,8 +117,8 @@ macro_rules! add_modular {
 }
 
 
-pub fn hash(message: String) -> [u32;8] {
-    let m = parse(padding(message));
+pub fn hash(message: &str) -> [u32;8] {
+    let m = parse(&padding(&message));
 
     let mut h1 = H[0] as u32;
     let mut h2 = H[1] as u32;
@@ -178,10 +178,10 @@ pub fn hash(message: String) -> [u32;8] {
 }
 
 
-pub fn format_hash(h: [u32;8]) -> String {
+pub fn format_hash(h: &[u32;8]) -> String {
     let mut o = String::from("");
     for i in 0..8 {
-        let raw = format!("{:08x}", h[i]);
+        let raw = format!("{:08x}", &h[i]);
         o.push_str(&raw);
     }
     o

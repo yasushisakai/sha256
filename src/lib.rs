@@ -8,14 +8,14 @@ mod tests {
     #[test]
     fn padding_test_0() {
 
-        let str = String::from("abc");
+        let testStr = "abc";
 
-        let mut m = padding(str.clone());
+        let mut m = padding(testStr);
 
         assert_eq!((m.len() * 32) % 512, 0);
 
         let mut pop = m.pop();
-        assert_eq!(pop, Some((str.len() as u32) * 8));
+        assert_eq!(pop, Some((testStr.len() as u32) * 8));
 
         for _ in 0..14 {
             pop = m.pop();
@@ -37,10 +37,9 @@ mod tests {
 
     #[test]
     fn parse_test_0() {
-        let str = String::from("abc");
-        let m = padding(str);
+        let m = padding("str");
 
-        let p = parse(m);
+        let p = parse(&m);
 
         assert_eq!(p.len(), 1);
         assert_eq!(p[0].len(), 16);
@@ -48,13 +47,14 @@ mod tests {
 
     #[test]
     fn hash_test_abc() {
-        let hashed = hash(String::from("0123456789abcdefghijklmnopqrstuvwxyz0123456789abcdefghijklmnopqrstuvwxyz0123456789abcdefghijklmnopqrstuvwxyz0123456789abcdefghijklmnopqrstuvwxyz"));
+        let hashed = hash("yasushi");
 
         println!("hashed \n
                  {:?}\n
-                 {}", hashed, format_hash(hashed));
-        assert!(false);
+                 {}", &hashed, format_hash(&hashed));
+        assert_eq!(format_hash(&hashed), "d793a1fbaccefa73d1acf6cadab12e9648ebdf475093eafea3b1cc4842337c4e");
     }
+
 
     fn show_binary(n: &u32) -> String {
         let raw_string = format!("{:032b}", n);
