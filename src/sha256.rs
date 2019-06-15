@@ -26,8 +26,6 @@ pub fn padding(m: &str) -> Vec<u32> {
         a.push(u32::from(c));
     }
 
-    println!("{:?}", &a);
-
     padding_u32(&a)
 }
 
