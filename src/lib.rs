@@ -7,7 +7,6 @@ mod tests {
 
     #[test]
     fn padding_test_0() {
-
         let testStr = "abc";
 
         let mut m = padding(testStr);
@@ -32,7 +31,6 @@ mod tests {
         assert_eq!(m.pop().unwrap(), sum);
 
         println!("{}", show_binary(&sum));
-
     }
 
     #[test]
@@ -49,12 +47,18 @@ mod tests {
     fn hash_test_abc() {
         let hashed = hash("yasushi");
 
-        println!("hashed \n
+        println!(
+            "hashed \n
                  {:?}\n
-                 {}", &hashed, format_hash(&hashed));
-        assert_eq!(format_hash(&hashed), "d793a1fbaccefa73d1acf6cadab12e9648ebdf475093eafea3b1cc4842337c4e");
+                 {}",
+            &hashed,
+            format_hash(&hashed)
+        );
+        assert_eq!(
+            format_hash(&hashed),
+            "d793a1fbaccefa73d1acf6cadab12e9648ebdf475093eafea3b1cc4842337c4e"
+        );
     }
-
 
     fn show_binary(n: &u32) -> String {
         let raw_string = format!("{:032b}", n);
@@ -65,14 +69,14 @@ mod tests {
             match chars.next() {
                 Some(c) => {
                     result.push(c);
-                },
-                None => break
+                }
+                None => break,
             }
 
             if i % 8 == 7 {
                 result.push(' ');
             }
-                    i = i + 1;
+            i = i + 1;
         }
 
         println!("{}", &result);
