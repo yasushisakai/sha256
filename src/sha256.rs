@@ -17,8 +17,27 @@ const H:[u32; 8] = [
     0x6a09e667, 0xbb67ae85, 0x3c6ef372, 0xa54ff53a, 0x510e527f, 0x9b05688c, 0x1f83d9ab, 0x5be0cd19 
 ];
 
-// TODO: out Result?
+
+
 pub fn padding(m: &str) -> Vec<u32> {
+
+    let chars = m.chars();
+
+    let mut a = Vec::with_capacity(m.len());
+
+    for (_, c) in chars.enumerate() {
+        a.push(u32::from(c));
+    }
+
+    println!("{:?}", &a);
+
+    padding_u32(&a)
+}
+
+
+
+// TODO: out Result?
+pub fn padding_u32(m: &[u32]) -> Vec<u32> {
 
     let mut vec = Vec::new();
     let str_len = m.len();
@@ -27,16 +46,18 @@ pub fn padding(m: &str) -> Vec<u32> {
     let n = (non_zeros / 512) + 1;
     let zeros = n * 512 - non_zeros; // num of zeros in binary;
 
-    // bundle chars to u32 
     let mut w:u32 = 0;
 
-    for (i, c) in m.chars().enumerate() {
-        w |= u32::from(c) << (3 - i % 4) * 8;
+    let mut i = 0;
+    for c in m.iter() {
+        w |= c << (3 - i % 4) * 8;
         
         if i % 4 == 3 {
             vec.push(w);
             w = 0;
-        } 
+        }
+
+        i += 1;
     }
     
     // add one to the end of the data

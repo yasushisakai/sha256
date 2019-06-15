@@ -75,8 +75,8 @@ mod tests {
                     i = i + 1;
         }
 
-        println!("{}", result);
-        String::from("hello")
+        println!("{}", &result);
+        result
     }
 
 }
